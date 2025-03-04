@@ -11,7 +11,7 @@ import porfolioImage from "@/public/assets/portfolio.dp.jpg"
 
 export default function Hero() {
   const [text, setText] = useState("")
-  const [fullText] = useState("Full Stack Developer | Tech Enthusiast")
+  const [fullText] = useState("Software Engineer | Full Stack Developer")
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
