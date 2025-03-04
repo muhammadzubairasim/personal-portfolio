@@ -32,7 +32,7 @@ const blogPosts = [
     title: "(Outdated) How to Fix the Error 'Component Definition is Missing Display Name' in React?",
     excerpt: "If you've encountered a 'Component definition is missing displayname' perplexing error, join us to unravel its secrets and find the ultimate solution. We'll also explore how some new releases of React or Babel can automatically handle (or at least mitigate) this scenario, and the manual steps you can take to define a proper 'displayName' for more effective debugging.",
     date: "September 17, 2022",
-    image: "/assets/blog-displayname.webp",
+    image: "/assets/blog-displayName.webp",
     featured: false,
     link: "https://docs.google.com/document/d/1VKzs4lwd1uPJ0dyw-afrCqcH1awRcOFY0_LWY4D11WM/edit?usp=sharing"
   },
