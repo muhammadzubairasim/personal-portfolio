@@ -1,4 +1,4 @@
-import { Github, Twitter, Linkedin, Heart } from "lucide-react"
+import { Github, Twitter, Linkedin, Heart, Phone } from "lucide-react"
 import Link from "next/link"
 
 export default function Footer() {
@@ -9,19 +9,19 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <p className="text-sm text-muted-foreground">© {currentYear} John Doe. All rights reserved.</p>
+            <p className="text-sm text-muted-foreground">© {currentYear} Muhammad Zubair Asim. All rights reserved.</p>
           </div>
 
           <div className="flex items-center space-x-6">
-            <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="https://github.com/muhammadzubairasim" className="text-muted-foreground hover:text-foreground transition-colors">
               <Github className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Twitter className="h-5 w-5" />
-              <span className="sr-only">Twitter</span>
+            <Link href="tel:+923074051817" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Phone className="h-5 w-5" />
+              <span className="sr-only">Phone</span>
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="https://www.linkedin.com/in/muhmmad-zubair-asim-345292231?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className="text-muted-foreground hover:text-foreground transition-colors">
               <Linkedin className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </Link>
