@@ -54,7 +54,7 @@ export default function Blog() {
 
   return (
     <section id="blog" className="py-20 bg-background/50 relative">
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-t from-secondary/10 to-transparent blur-3xl transform translate-y-1/2 rounded-full opacity-20" />
+      <div className="absolute bottom-0 left-0 w-full md:w-[500px] md:h-[500px] bg-gradient-to-t from-secondary/10 to-transparent blur-3xl transform translate-y-1/2 rounded-full opacity-20" />
 
       <div className="container mx-auto px-4">
         <motion.div

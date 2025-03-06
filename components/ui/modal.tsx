@@ -93,7 +93,7 @@ export function Modal({
                                 ease: "easeInOut" 
                             }
                         }}
-                        className="relative z-50 w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800 sm:max-w-lg"
+                        className="relative z-50 w-screen max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800 sm:max-w-lg"
                     >
                         {/* Close button */}
                         <motion.button
@@ -139,7 +139,7 @@ export function Modal({
                         </motion.div>
                     </motion.div>
                 </div>
-            )}
+            )} 
         </AnimatePresence>
     );
 }

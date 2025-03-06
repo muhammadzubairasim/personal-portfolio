@@ -10,8 +10,12 @@ import emailjs from "@emailjs/browser"
 import { Textarea } from "@/components/ui/textarea"
 import { Github, Twitter, Linkedin, Mail, Send, Instagram, Phone } from "lucide-react"
 import { Label } from "@/components/ui/label"
+import { useToast } from "@/hooks/use-toast"
+
+
 
 export default function Contact() {
+  const { toast } = useToast()
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -43,15 +47,24 @@ export default function Contact() {
         },
         "QmawDcbWMMGhU94bp" // Replace with your EmailJS public key
       )
-
-      alert("Message sent successfully! ✅")
+      toast({
+        title: "Message sent successfully! ✅", 
+        description: "I'll get back to you as soon as possible.",
+        duration: 2000, // Close after 5 seconds
+        variant: "default" // Success toast
+      })
       setFormState({ name: "", email: "", message: "" })
     } catch (error) {
       console.error("EmailJS error:", error)
-      alert("Failed to send message. Please try again. ❌")
+      toast({
+        title: "Message Delivery Failed",
+        description: "There was an error sending your message. Please try again later or contact directly via email.",
+        duration: 3000, 
+        variant: "destructive"
+      })
+    } finally {
+      setIsSubmitting(false)
     }
-
-    setIsSubmitting(false)
   }
 
   const socialLinks = [
@@ -63,8 +76,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 bg-background relative">
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-to-b from-primary/5 to-transparent blur-3xl transform -translate-y-1/2 rounded-full opacity-20" />
-
+      <div className="absolute top-0 left-0 w-full md:w-[500px] md:h-[500px] bg-gradient-to-b from-primary/5 to-transparent blur-3xl transform -translate-y-1/2 rounded-full opacity-20" />
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -81,8 +93,8 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="space-y-6"

@@ -173,8 +173,8 @@ export default function Projects() {
             </motion.div>
           ))}
         </motion.div>
-        <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)} children={(modalChildren())}  />
       </div>
+        <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)} children={(modalChildren())}  />
     </section>
   )
 }
