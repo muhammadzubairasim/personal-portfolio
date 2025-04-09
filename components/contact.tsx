@@ -44,6 +44,7 @@ export default function Contact() {
           from_email: formState.email,
           to_name:"Muhammad Zubair",
           message: formState.message,
+          reply_to:formState.email
         },
         "QmawDcbWMMGhU94bp" // Replace with your EmailJS public key
       )
