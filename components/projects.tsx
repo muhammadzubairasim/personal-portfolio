@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { ReactElement, ReactNode, useState } from "react"
 import { Modal } from "./ui/modal"
+import { title } from "process"
 
 const projects = [
   {
@@ -46,6 +47,33 @@ const projects = [
     tags: ["Angular", "TypeScript", "LocalStorage", "CRUD", "Tags"],
     github: "https://github.com/muhammadzubairasim/angular-notes-taking-app",
     demo: "https://muhammadzubairasim.github.io/angular-notes-taking-app/",
+  },
+  {
+    id: 5,
+    title: "Flood Prediction System",
+    description: "A flood prediction system using machine learning and AI",
+    image: "./assets/flood-prediction.webp",
+    tags: ["Python", "Machine Learning", "AI", "FastAPI", "PostgreSQL" , "Pandas" , "Scikit-Learn"],
+    github: "https://github.com/muhammadzubairasim/flood-prediction-model",
+    demo: null,
+  },
+  {
+    id: 6,
+    title: "Pharmacy App",
+    description: "A comprehensive French pharmacy app where admin manages pharmacies, patients can order medicines for themselves or family members, with delivery service integration.",
+    image: "./assets/pharmacy.png",
+    tags: ["React Native", "Node","Typescript", "Admin Panel", "Family Management", "Delivery Tracking"],
+    github: null,
+    demo: null,
+  },
+  {
+    id: 7,
+    title: "Ride Sharing App",
+    description: "A comprehensive ride sharing platform where users can offer and book shared rides, reducing travel costs and environmental impact.",
+    image: "./assets/rideSharing.png",
+    tags: ["React Native", "Node", "MongoDB", "Socket.io", "PostGIS", "Stripe Payment Integration"],
+    github: null,
+    demo: null,
   },
 ]
 
@@ -134,7 +162,7 @@ export default function Projects() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {projects.map((project) => (
+          {projects.sort((a, b) => b.id - a.id).map((project) => (
             <motion.div key={project.id} variants={itemVariants} className="h-full">
               <Card className="h-full overflow-hidden group border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300">
                 <div className="relative h-48 overflow-hidden">
