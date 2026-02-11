@@ -64,16 +64,46 @@ const projects = [
     image: "./assets/pharmacy.png",
     tags: ["React Native", "Node","Typescript", "Admin Panel", "Family Management", "Delivery Tracking"],
     github: null,
-    demo: null,
+    demo: "https://apps.apple.com/my/app/mezordo/id6749220185",
   },
   {
     id: 7,
     title: "Ride Sharing App",
     description: "A comprehensive ride sharing platform where users can offer and book shared rides, reducing travel costs and environmental impact.",
-    image: "./assets/rideSharing.png",
+    image: "./assets/twobirds.png",
     tags: ["React Native", "Node", "MongoDB", "Socket.io", "PostGIS", "Stripe Payment Integration"],
     github: null,
     demo: null,
+  },
+  {
+    id: 8,
+    title: "LaLaLaugh - Social Media Platform",
+    description:
+      "Instagram-style comedy video app with serverless media processing converting uploads to HLS format at scale. Features a recommendation system analyzing user behavior and engagement metrics for personalized feeds.",
+    image: "./assets/lalalaugh.png",
+    tags: ["AWS MediaConvert", "Lambda", "SQS", "NestJS", "React Native"],
+    github: null,
+    demo: "https://www.lalalaugh.com/",
+  },
+  {
+    id: 10,
+    title: "Postpartum by NourishWise",
+    description:
+      "AI-powered nutrition app generating personalized meal plans for postpartum mothers using OpenAI integration. Uses BullMQ message queue for scheduled notifications and automated meal plan generation.",
+    image: "./assets/postpartum.png",
+    tags: ["NestJS", "OpenAI API", "BullMQ", "PostgreSQL", "React Native"],
+    github: null,
+    demo: "https://www.nourishwisehealth.com/",
+  },
+  {
+    id: 11,
+    title: "UK Visa Portal",
+    description:
+      "Automated visa application platform with document verification, payment processing, and application tracking.",
+    image: "./assets/ukvisa.png",
+    tags: ["Node.js", "AWS S3", "Stripe", "React"],
+    github: null,
+    demo: "https://www.ukvisaportal.com/",
   },
 ]
 
@@ -164,7 +194,7 @@ export default function Projects() {
         >
           {projects.sort((a, b) => b.id - a.id).map((project) => (
             <motion.div key={project.id} variants={itemVariants} className="h-full">
-              <Card className="h-full overflow-hidden group border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300">
+              <Card className="h-full overflow-hidden group border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 flex flex-col">
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src={project.image || "/placeholder.svg"}
@@ -178,7 +208,7 @@ export default function Projects() {
                   <CardTitle className="text-xl">{project.title}</CardTitle>
                   <CardDescription>{project.description}</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1">
                   <div className="flex flex-wrap gap-2 mt-2">
                     {project.tags.map((tag) => (
                       <Badge key={tag} variant="secondary" className="bg-secondary/30">
@@ -187,7 +217,7 @@ export default function Projects() {
                     ))}
                   </div>
                 </CardContent>
-                <CardFooter className="flex justify-between">
+                <CardFooter className="flex justify-between mt-auto">
                   <Button onClick={() => showCode(project.github)}  variant="outline" size="sm" className="group/btn">
                     <Github className="mr-2 h-4 w-4 transition-transform group-hover/btn:scale-110" />
                     GitHub

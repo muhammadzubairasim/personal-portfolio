@@ -77,7 +77,6 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 bg-background relative">
-      <div className="absolute top-0 left-0 w-full md:w-[500px] md:h-[500px] bg-gradient-to-b from-primary/5 to-transparent blur-3xl transform -translate-y-1/2 rounded-full opacity-20" />
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

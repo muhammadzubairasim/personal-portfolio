@@ -14,43 +14,43 @@ const blogPosts = [
     excerpt:
       "React's useState setter function doesn't update the state immediately because state updates are asynchronous. If your UI isn't reflecting changes as expected, you might be facing stale state issues or misunderstanding React's batching mechanism. This guide explores why this happens and how to fix it using functional updates, useEffect, and best practices.",
     date: "September 8, 2023",
-    image: "/assets/blog-useState.webp",
+    image: "/assets/use-state.png",
     featured: true,
-    link: "https://docs.google.com/document/d/1bBna0Gt2UsolViiHcHJPRvHYoB1pPIkMnKRETXQpXvY/edit?usp=sharing"
+    link: "https://medium.com/@zubairasim7/understanding-react-usestate-why-state-updates-dont-reflect-immediately-2cf16e890348"
   },
   {
-    id: 2,
-    title: "How to Fix the Error 'Cannot Set Headers After They Are Sent to the Client' in JavaScript?",
-    excerpt: "A common challenge in Node.js development is the 'Cannot set headers after they are sent to the client' error. This guide explains why it happens, how to prevent it, and best practices for handling multiple responses properly in your backend.",
-    date: "September 17, 2022",
-    image: "/assets/blog-node-res.webp",
-    featured: false,
-    link: "https://docs.google.com/document/d/1xDujYEgIMfryucfcKnrc-2qsUOtTL63h4I5KfDPCszY/edit?usp=sharing"
-  },  
-  {
-    id: 3,
-    title: "(Outdated) How to Fix the Error 'Component Definition is Missing Display Name' in React?",
-    excerpt: "If you've encountered a 'Component definition is missing displayname' perplexing error, join us to unravel its secrets and find the ultimate solution. We'll also explore how some new releases of React or Babel can automatically handle (or at least mitigate) this scenario, and the manual steps you can take to define a proper 'displayName' for more effective debugging.",
-    date: "September 17, 2022",
-    image: "/assets/blog-displayName.webp",
-    featured: false,
-    link: "https://docs.google.com/document/d/1VKzs4lwd1uPJ0dyw-afrCqcH1awRcOFY0_LWY4D11WM/edit?usp=sharing"
-  },
-  {
-    id: 4,
+    id: 7,
     title: "How to Fix 'AttributeError: Module Numpy Has No Attribute Bool'?",
     excerpt: "Learn what the 'AttributeError: module 'numpy' has no attribute 'bool'' error in Python means, its common causes, and suitable solutions, through this guide.",
     date: "October 4, 2023",
     image: "/assets/blog-numpy.webp",
     featured: false,
     link: "https://docs.google.com/document/d/1zyLtW477Fe5Vwb7ZZzHljv2TqpJNen29LT-6ywF3OMk/edit?usp=sharing"
+  },
+  {
+    id: 5,
+    title: "Timezone Issues Resolved: The Complete Guide to Date-Accurate Database Queries",
+    excerpt: "A comprehensive guide to handling timezone issues in database queries. Learn how to ensure date accuracy across different timezones, avoid common pitfalls, and implement best practices for storing and querying datetime data in your applications.",
+    date: "February 11, 2026",
+    image: "/assets/time-zone.webp",
+    featured: false,
+    link: "https://medium.com/@zubairasim7/timezone-issues-resolved-the-complete-guide-to-date-accurate-database-queries-2e7767cba210"
+  },
+  {
+    id: 6,
+    title: "Debug Like a Pro — Say No to console.logs(\"\") Anymore 🚫",
+    excerpt: "Stop relying on console.log for debugging! Discover professional debugging techniques, tools, and strategies that will elevate your development workflow. Learn how to use breakpoints, debugger tools, and modern debugging practices effectively.",
+    date: "February 11, 2026",
+    image: "/assets/console.png",
+    featured: false,
+    link: "https://medium.com/@zubairasim7/debug-like-a-pro-say-no-to-console-logs-anymore-60a99f19e27a"
   }
   
 ]
 
 export default function Blog() {
   const featuredPost = blogPosts.find((post) => post.featured)
-  const regularPosts = blogPosts.filter((post) => !post.featured)
+  const regularPosts = blogPosts.filter((post) => !post.featured).sort(((a,b)=> a.id < b.id ? -1 : 1  ))
 
   return (
     <section id="blog" className="py-20 bg-background/50 relative">

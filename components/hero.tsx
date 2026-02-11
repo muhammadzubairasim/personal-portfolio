@@ -97,7 +97,7 @@ export default function Hero() {
                 </a>
                 <a
                 className="group z-50 inline-flex items-center justify-center px-4 py-2 border border-transparent text-lg font-medium rounded-md text-primary bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                href="/assets/Muhammad-Zubair-Asim-resume.pdf"
+                href="/assets/zubair_resume.pdf"
                 download="Muhammad-Zubair-Asim-resume.pdf"
                 >
                 Download Resume
