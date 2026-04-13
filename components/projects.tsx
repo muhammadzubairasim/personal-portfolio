@@ -105,6 +105,16 @@ const projects = [
     github: null,
     demo: "https://www.ukvisaportal.com/",
   },
+    {
+    id: 12,
+    title: "PersonAI - AI To-Do List & Planner",
+    description:
+      "AI-powered personal assistant app for task management and daily planning. Built the backend with smart task generation using OpenAI, personalized daily plans, and subscription management with in-app purchases.",
+    image: "./assets/personai.png",
+    tags: ["NestJS", "Generative AI", "PostgreSQL","Clerk", "TypeScript"],
+    github: null,
+    demo: "https://apps.apple.com/us/app/personai-to-do-list-planner/id6759544344",
+  },
 ]
 
 export default function Projects() {

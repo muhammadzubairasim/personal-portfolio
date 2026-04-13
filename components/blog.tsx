@@ -1,56 +1,37 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, Calendar } from "lucide-react"
+import { ArrowRight, Calendar, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
-import Link from "next/link"
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "React useState: Why Your State Update Isn't Instant & How to Solve It!",
-    excerpt:
-      "React's useState setter function doesn't update the state immediately because state updates are asynchronous. If your UI isn't reflecting changes as expected, you might be facing stale state issues or misunderstanding React's batching mechanism. This guide explores why this happens and how to fix it using functional updates, useEffect, and best practices.",
-    date: "September 8, 2023",
-    image: "/assets/use-state.png",
-    featured: true,
-    link: "https://medium.com/@zubairasim7/understanding-react-usestate-why-state-updates-dont-reflect-immediately-2cf16e890348"
-  },
-  {
-    id: 7,
-    title: "How to Fix 'AttributeError: Module Numpy Has No Attribute Bool'?",
-    excerpt: "Learn what the 'AttributeError: module 'numpy' has no attribute 'bool'' error in Python means, its common causes, and suitable solutions, through this guide.",
-    date: "October 4, 2023",
-    image: "/assets/blog-numpy.webp",
-    featured: false,
-    link: "https://docs.google.com/document/d/1zyLtW477Fe5Vwb7ZZzHljv2TqpJNen29LT-6ywF3OMk/edit?usp=sharing"
-  },
-  {
-    id: 5,
-    title: "Timezone Issues Resolved: The Complete Guide to Date-Accurate Database Queries",
-    excerpt: "A comprehensive guide to handling timezone issues in database queries. Learn how to ensure date accuracy across different timezones, avoid common pitfalls, and implement best practices for storing and querying datetime data in your applications.",
-    date: "February 11, 2026",
-    image: "/assets/time-zone.webp",
-    featured: false,
-    link: "https://medium.com/@zubairasim7/timezone-issues-resolved-the-complete-guide-to-date-accurate-database-queries-2e7767cba210"
-  },
-  {
-    id: 6,
-    title: "Debug Like a Pro — Say No to console.logs(\"\") Anymore 🚫",
-    excerpt: "Stop relying on console.log for debugging! Discover professional debugging techniques, tools, and strategies that will elevate your development workflow. Learn how to use breakpoints, debugger tools, and modern debugging practices effectively.",
-    date: "February 11, 2026",
-    image: "/assets/console.png",
-    featured: false,
-    link: "https://medium.com/@zubairasim7/debug-like-a-pro-say-no-to-console-logs-anymore-60a99f19e27a"
-  }
-  
-]
+interface BlogPost {
+  title: string
+  excerpt: string
+  date: string
+  image: string
+  link: string
+  categories: string[]
+}
 
 export default function Blog() {
-  const featuredPost = blogPosts.find((post) => post.featured)
-  const regularPosts = blogPosts.filter((post) => !post.featured).sort(((a,b)=> a.id < b.id ? -1 : 1  ))
+  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch("/api/blogs")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) setPosts(data)
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [])
+
+  const featuredPost = posts[0]
+  const regularPosts = posts.slice(1)
 
   return (
     <section id="blog" className="py-20 bg-background/50 relative">
@@ -70,7 +51,13 @@ export default function Blog() {
           </p>
         </motion.div>
 
-        {featuredPost && (
+        {loading && (
+          <div className="flex justify-center items-center py-20">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        )}
+
+        {!loading && featuredPost && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -81,12 +68,19 @@ export default function Blog() {
             <Card className="overflow-hidden border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="relative h-64 md:h-auto">
-                  <Image
-                    src={featuredPost.image || "/placeholder.svg"}
-                    alt={featuredPost.title}
-                    fill
-                    className="object-cover"
-                  />
+                  {featuredPost.image ? (
+                    <Image
+                      src={featuredPost.image}
+                      alt={featuredPost.title}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-muted flex items-center justify-center">
+                      <span className="text-muted-foreground">No image</span>
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col justify-center p-6">
                   <div className="flex items-center text-sm text-muted-foreground mb-4">
@@ -96,7 +90,7 @@ export default function Blog() {
                   </div>
                   <CardTitle className="text-2xl md:text-3xl mb-4">{featuredPost.title}</CardTitle>
                   <CardDescription className="text-base mb-6">{featuredPost.excerpt}</CardDescription>
-                  <Button onClick={()=>{ window.open(featuredPost.link , "_blank")?.focus() } } className="w-fit group">
+                  <Button onClick={() => window.open(featuredPost.link, "_blank")?.focus()} className="w-fit group">
                     Read Article
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
@@ -106,46 +100,54 @@ export default function Blog() {
           </motion.div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {regularPosts.map((post, index) => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card className="h-full overflow-hidden group border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300">
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={post.image || "/placeholder.svg"}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-                <CardHeader>
-                  <div className="flex items-center text-sm text-muted-foreground mb-2">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    <span>{post.date}</span>
+        {!loading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {regularPosts.map((post, index) => (
+              <motion.div
+                key={post.link}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="h-full overflow-hidden group border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300">
+                  <div className="relative h-48 overflow-hidden">
+                    {post.image ? (
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-muted flex items-center justify-center">
+                        <span className="text-muted-foreground">No image</span>
+                      </div>
+                    )}
                   </div>
-                  <CardTitle className="line-clamp-2">{post.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="line-clamp-3">{post.excerpt}</CardDescription>
-                </CardContent>
-                <CardFooter>
-                  <a href={post.link} target="_blank" className="text-primary hover:underline group inline-flex items-center">
-                    Read More
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </a>
-                </CardFooter>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+                  <CardHeader>
+                    <div className="flex items-center text-sm text-muted-foreground mb-2">
+                      <Calendar className="h-4 w-4 mr-2" />
+                      <span>{post.date}</span>
+                    </div>
+                    <CardTitle className="line-clamp-2">{post.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="line-clamp-3">{post.excerpt}</CardDescription>
+                  </CardContent>
+                  <CardFooter>
+                    <a href={post.link} target="_blank" className="text-primary hover:underline group inline-flex items-center">
+                      Read More
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </a>
+                  </CardFooter>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
 }
-
